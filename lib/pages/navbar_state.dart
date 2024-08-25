@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import '../widgets/bottom_navbar.dart';
 import 'home_page.dart';
 import 'product_page.dart';
-import 'profile_page.dart';
+import 'profile/profile_page.dart';
 import 'user_page.dart';
 
 class NavbarAdmin extends StatefulWidget {
