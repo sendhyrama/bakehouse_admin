@@ -8,8 +8,9 @@ class BottomNavBar extends StatelessWidget {
   final Function(int) onItemTapped;
   final double height;
 
-  BottomNavBar(
-      {required this.selectedIndex,
+  const BottomNavBar(
+      {super.key,
+      required this.selectedIndex,
       required this.onItemTapped,
       this.height = 70.0});
 
@@ -32,7 +33,7 @@ class BottomNavBar extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: _buildSvgIcon("assets/icons/produk.svg", 2),
-            label: 'Favorit',
+            label: 'Produk',
           ),
           BottomNavigationBarItem(
             icon: _buildSvgIcon("assets/icons/profil.svg", 3),
@@ -41,9 +42,8 @@ class BottomNavBar extends StatelessWidget {
         ],
         selectedItemColor: PrimaryColor.c8,
         unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        selectedLabelStyle: TextStyles.b2.copyWith(color: PrimaryColor.c8),
-        unselectedLabelStyle: TextStyles.b2.copyWith(color: Colors.grey),
+        selectedLabelStyle: TextStyles.b1.copyWith(color: PrimaryColor.c8),
+        unselectedLabelStyle: TextStyles.b1.copyWith(color: Colors.grey),
       ),
     );
   }
