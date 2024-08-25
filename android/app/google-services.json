@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "833411538626",
+    "project_id": "bakehouse-2f708",
+    "storage_bucket": "bakehouse-2f708.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833411538626:android:3b91ece1c954ad8109655b",
+        "android_client_info": {
+          "package_name": "com.example.bakehouse_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6IB_YKLSxANgoGt8_FHnmylQCdcWRe4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
