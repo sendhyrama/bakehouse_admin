@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:833411538626:android:e2b49e276baf58bb09655b",
+        "android_client_info": {
+          "package_name": "com.example.bakehouse_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6IB_YKLSxANgoGt8_FHnmylQCdcWRe4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:833411538626:android:3b91ece1c954ad8109655b",
         "android_client_info": {
           "package_name": "com.example.bakehouse_app"
