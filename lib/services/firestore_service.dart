@@ -11,19 +11,32 @@ class FirestoreService {
         snapshot.docs.map((doc) => Product.fromMap(doc.data())).toList());
   }
 
+  Future<void> deleteUser(String userId) async {
+    try {
+      await _db.collection('users').doc(userId).delete();
+    } catch (e) {
+      throw Exception('Error deleting user: $e');
+    }
+  }
+
   Future<User?> getUserById(String userId) async {
     final doc = await _db.collection('users').doc(userId).get();
     if (doc.exists) {
-      return User.fromMap(doc.data()!);
+      return User.fromMap(doc.id, doc.data()!);
     } else {
       return null;
     }
   }
 
-  Future<List<User>> getUsersByRole(String role) async {
-    final snapshot =
-        await _db.collection('users').where('role', isEqualTo: role).get();
-    return snapshot.docs.map((doc) => User.fromMap(doc.data())).toList();
+  Stream<List<User>> getUsersByRole(String role) {
+    return _db
+        .collection('users')
+        .where('role', isEqualTo: role)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) =>
+                User.fromMap(doc.id, doc.data() as Map<String, dynamic>))
+            .toList());
   }
 
   Future<int> getTotalUsers() async {

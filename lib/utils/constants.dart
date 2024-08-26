@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class AppConstants {
   // API Endpoints
   static const String apiBaseUrl = 'https://api.example.com';
@@ -42,5 +44,12 @@ class AppConstants {
 
   // Other constants
   static const String currencySymbol = 'Rp';
-  static const String dateFormat = 'yyyy-MM-dd';
+
+  // Define Date Formats
+  static final DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+  static final DateFormat timeFormat = DateFormat('HH:mm:ss');
+  static final DateFormat dateTimeFormat = DateFormat('dd/MM/yyyy HH:mm:ss');
+  
+  // You can add more specific formats as needed
+  static final DateFormat bornDateFormat = DateFormat('dd MMM yyyy');
 }
