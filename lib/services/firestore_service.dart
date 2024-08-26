@@ -1,9 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/product_model.dart';
 import '../models/user_model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  Stream<List<Product>> getProducts() {
+    return _db.collection('products').snapshots().map((snapshot) =>
+        snapshot.docs.map((doc) => Product.fromMap(doc.data())).toList());
+  }
+
+  Future<User?> getUserById(String userId) async {
+    final doc = await _db.collection('users').doc(userId).get();
+    if (doc.exists) {
+      return User.fromMap(doc.data()!);
+    } else {
+      return null;
+    }
+  }
 
   Future<List<User>> getUsersByRole(String role) async {
     final snapshot =
