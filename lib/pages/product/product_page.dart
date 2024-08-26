@@ -1,12 +1,14 @@
-import 'package:bakehouse_admin/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/product_model.dart';
 import '../../models/user_model.dart';
+import '../../providers/product_provider.dart';
 import '../../services/firestore_service.dart';
 import '../../utils/colors.dart';
 import '../../utils/text_styles.dart';
 import '../../widgets/product_card.dart';
+import '../../widgets/search_bar.dart';
+import 'product_detail_page.dart';
 
 final productsProvider = StreamProvider<List<Product>>((ref) {
   return FirestoreService().getProducts();
@@ -35,6 +37,42 @@ class _ProductPageState extends ConsumerState<ProductPage> {
     });
   }
 
+  Future<void> _onDeleteProduct(BuildContext context, String productId) async {
+    final confirmed = await _showConfirmationDialog(context);
+    if (confirmed) {
+      await ref.read(deleteProductProvider(productId).future);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Produk berhasil terhapus!')),
+      );
+    }
+  }
+
+  Future<bool> _showConfirmationDialog(BuildContext context) async {
+    return await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Hapus Produk', style: TextStyles.h3),
+            content: const Text(
+              'Apakah kamu yakin ingin menghapus produk ini?',
+              style: TextStyles.b1,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text('Batal',
+                    style: TextStyles.b1.copyWith(color: NeutralColor.c7)),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text('Hapus',
+                    style: TextStyles.b1.copyWith(color: Colors.red)),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final productsAsyncValue = ref.watch(productsProvider);
@@ -61,11 +99,10 @@ class _ProductPageState extends ConsumerState<ProductPage> {
           Expanded(
             child: productsAsyncValue.when(
               data: (products) {
-                // Filter the products based on the search query
                 final filteredProducts = _searchQuery.isEmpty
                     ? products
                     : products.where((product) {
-                        final productName = product.productName.toLowerCase();
+                        final productName = product.name.toLowerCase();
                         return productName.contains(_searchQuery);
                       }).toList();
 
@@ -87,8 +124,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const SizedBox
-                              .shrink(); // Do nothing while loading
+                          return const SizedBox.shrink();
                         }
                         if (snapshot.hasError) {
                           return const Text('Error loading merchant data');
@@ -96,23 +132,30 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                         final user = snapshot.data;
                         return ProductCard(
                           imageUrl: product.imageUrl,
-                          productName: product.productName,
-                          productUnit: product.productUnit,
+                          productName: product.name,
+                          productUnit: product.unit,
                           merchantName:
                               user?.businessName ?? 'Unknown Merchant',
                           price: product.price,
-                          onDelete: () {
-                            // Handle delete action here
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductDetailPage(
+                                  product: product,
+                                  productId: product.id,
+                                ),
+                              ),
+                            );
                           },
+                          onDelete: () => _onDeleteProduct(context, product.id),
                         );
                       },
                     );
                   },
                 );
               },
-              loading: () => const Center(
-                  child:
-                      CircularProgressIndicator()), // Single circular progress indicator
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, stack) => Center(child: Text('Error: $error')),
             ),
           ),

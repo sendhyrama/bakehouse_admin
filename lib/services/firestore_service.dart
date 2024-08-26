@@ -7,8 +7,10 @@ class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Stream<List<Product>> getProducts() {
-    return _db.collection('products').snapshots().map((snapshot) =>
-        snapshot.docs.map((doc) => Product.fromMap(doc.data())).toList());
+    return _db.collection('products').snapshots().map((snapshot) => snapshot
+        .docs
+        .map((doc) => Product.fromMap(doc.id, doc.data()))
+        .toList());
   }
 
   Future<void> deleteUser(String userId) async {
@@ -71,5 +73,9 @@ class FirestoreService {
         .where('orderStatus', isEqualTo: 'Selesai')
         .get();
     return snapshot.size;
+  }
+
+  Future<void> deleteProduct(String productId) async {
+    await _db.collection('products').doc(productId).delete();
   }
 }

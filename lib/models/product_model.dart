@@ -1,25 +1,31 @@
 class Product {
+  final String id;
+  final String description;
   final String imageUrl;
-  final String productName;
-  final String userId;
+  final String name;
   final double price;
-  final String productUnit;
+  final String unit;
+  final String userId;
 
   Product({
+    required this.id,
+    required this.description,
     required this.imageUrl,
-    required this.productName,
-    required this.userId,
+    required this.name,
     required this.price,
-    required this.productUnit,
+    required this.unit,
+    required this.userId,
   });
 
-  factory Product.fromMap(Map<String, dynamic> data) {
+  factory Product.fromMap(String id, Map<String, dynamic> data) {
     return Product(
-      imageUrl: data['imageUrl'] ?? '',
-      productName: data['name'] ?? '',
-      userId: data['userId'] ?? '',
-      price: data['price'] ?? 0.0,
-      productUnit: data['unit'] ?? '',
+      id: id,
+      description: data['description'],
+      imageUrl: data['imageUrl'],
+      name: data['name'],
+      price: (data['price'] as num).toDouble(),
+      unit: data['unit'],
+      userId: data['userId'],
     );
   }
 }
