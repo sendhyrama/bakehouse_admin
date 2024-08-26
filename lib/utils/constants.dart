@@ -25,8 +25,10 @@ class AppConstants {
   static const double defaultFontSize = 14.0;
 
   // Error Messages
-  static const String networkError = 'Unable to connect. Please try again later.';
-  static const String unknownError = 'An unknown error occurred. Please try again.';
+  static const String networkError =
+      'Unable to connect. Please try again later.';
+  static const String unknownError =
+      'An unknown error occurred. Please try again.';
 
   // Regex Patterns
   static const String emailPattern =
@@ -35,8 +37,8 @@ class AppConstants {
 
   // Asset paths
   static const String logoPath = 'assets/images/logo-light.svg';
-  static const String userPlaceholderPath = 'assets/images/icons/user.png';
-  static const String imagePlaceholderPath = 'assets/images/icons/image.png';
+  static const String userPlaceholderPath = 'assets/icons/user.png';
+  static const String imagePlaceholderPath = 'assets/icons/image.png';
 
   // Other constants
   static const String currencySymbol = 'Rp';

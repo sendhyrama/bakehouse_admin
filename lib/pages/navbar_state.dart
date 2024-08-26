@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../widgets/bottom_navbar.dart';
 import 'home_page.dart';
-import 'product_page.dart';
+import 'product/product_page.dart';
 import 'profile/profile_page.dart';
-import 'user_page.dart';
+import 'user/user_page.dart';
 
 class NavbarAdmin extends StatefulWidget {
   final int initialIndex;

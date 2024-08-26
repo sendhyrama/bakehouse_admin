@@ -1,9 +1,5 @@
-import 'package:bakehouse_admin/services/firestore_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final firestoreServiceProvider = Provider<FirestoreService>((ref) {
-  return FirestoreService();
-});
+import 'firestore_service_provider.dart';
 
 final totalUsersProvider = FutureProvider<int>((ref) async {
   final firestoreService = ref.read(firestoreServiceProvider);

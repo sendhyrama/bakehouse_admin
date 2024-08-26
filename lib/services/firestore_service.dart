@@ -1,7 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/user_model.dart';
+
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  Future<List<User>> getUsersByRole(String role) async {
+    final snapshot =
+        await _db.collection('users').where('role', isEqualTo: role).get();
+    return snapshot.docs.map((doc) => User.fromMap(doc.data())).toList();
+  }
 
   Future<int> getTotalUsers() async {
     QuerySnapshot snapshot = await _db.collection('users').get();
