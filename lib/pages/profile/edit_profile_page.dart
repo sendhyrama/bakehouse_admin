@@ -83,7 +83,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         final imageUrl = await _uploadImage();
         await _updateUser(userId, imageUrl);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile updated successfully.')),
+          const SnackBar(content: Text('Profile berhasil di-update.')),
         );
         // Navigator.pushReplacementNamed(context, Routes.navbarAdmin, arguments: 3);
         Navigator.push(

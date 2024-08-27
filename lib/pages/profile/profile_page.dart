@@ -179,7 +179,7 @@ class ProfilePage extends ConsumerWidget {
           .pushNamedAndRemoveUntil('/login-admin', (route) => false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text("Signed Out!"),
+          content: const Text("Logout berhasil!"),
           behavior: SnackBarBehavior.floating,
           duration: const Duration(seconds: 3),
           shape: RoundedRectangleBorder(
@@ -191,7 +191,7 @@ class ProfilePage extends ConsumerWidget {
       print("Error logout: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Sign Out failed: $e"),
+          content: Text("Logout gagal: $e"),
           behavior: SnackBarBehavior.floating,
           duration: const Duration(seconds: 3),
           shape: RoundedRectangleBorder(

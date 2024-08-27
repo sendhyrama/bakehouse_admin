@@ -34,10 +34,10 @@ class _LoginAdminPageState extends ConsumerState<LoginAdminPage> {
       String? userRole = ref.read(authProvider.notifier).userRole;
 
       if (userRole == 'admin') {
-        _showSnackbar("Login Successful!");
+        _showSnackbar("Login berhasil!");
         Navigator.pushNamed(context, '/navbar-admin');
       } else {
-        _showSnackbar("You do not have permission to access this page.");
+        _showSnackbar("Kamu tidak memiliki akses role terkait untuk masuk.");
         await ref.read(authProvider.notifier).signOut();
       }
     } catch (e) {
