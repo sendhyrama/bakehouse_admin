@@ -37,42 +37,39 @@ class FirestoreService {
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) =>
-                User.fromMap(doc.id, doc.data() as Map<String, dynamic>))
+                User.fromMap(doc.id, doc.data()))
             .toList());
   }
 
-  Future<int> getTotalUsers() async {
-    QuerySnapshot snapshot = await _db.collection('users').get();
-    return snapshot.size;
-  }
-
-  Future<int> getTotalUMKM() async {
-    QuerySnapshot snapshot = await _db
+  Stream<int> getTotalUMKM() {
+    return _db
         .collection('users')
         .where('role', isEqualTo: 'merchant')
-        .get();
-    return snapshot.size;
+        .snapshots()
+        .map((snapshot) => snapshot.size);
   }
 
-  Future<int> getTotalCustomers() async {
-    QuerySnapshot snapshot = await _db
+  Stream<int> getTotalCustomers() {
+    return _db
         .collection('users')
         .where('role', isEqualTo: 'customer')
-        .get();
-    return snapshot.size;
+        .snapshots()
+        .map((snapshot) => snapshot.size);
   }
 
-  Future<int> getTotalProducts() async {
-    QuerySnapshot snapshot = await _db.collection('products').get();
-    return snapshot.size;
+  Stream<int> getTotalProducts() {
+    return _db
+        .collection('products')
+        .snapshots()
+        .map((snapshot) => snapshot.size);
   }
 
-  Future<int> getTotalCompletedOrders() async {
-    QuerySnapshot snapshot = await _db
+  Stream<int> getTotalCompletedOrders() {
+    return _db
         .collection('orders')
         .where('orderStatus', isEqualTo: 'Selesai')
-        .get();
-    return snapshot.size;
+        .snapshots()
+        .map((snapshot) => snapshot.size);
   }
 
   Future<void> deleteProduct(String productId) async {
