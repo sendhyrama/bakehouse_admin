@@ -17,7 +17,7 @@ class FirestoreService {
     try {
       await _db.collection('users').doc(userId).delete();
     } catch (e) {
-      throw Exception('Error deleting user: $e');
+      throw Exception('Error menghapus pengguna: $e');
     }
   }
 

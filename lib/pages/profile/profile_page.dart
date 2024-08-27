@@ -54,8 +54,6 @@ class ProfilePage extends ConsumerWidget {
           }
 
           var userData = snapshot.data!;
-          var userEmail =
-              FirebaseAuth.instance.currentUser?.email ?? 'Email not found';
           var profileImageUrl = userData['profileImageUrl'];
           var userFullname = userData['fullname'];
 
@@ -190,7 +188,7 @@ class ProfilePage extends ConsumerWidget {
         ),
       );
     } catch (e) {
-      print("Error signing out: $e");
+      print("Error logout: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Sign Out failed: $e"),

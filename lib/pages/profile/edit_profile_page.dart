@@ -60,7 +60,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       await ref.putFile(_image!);
       return await ref.getDownloadURL();
     } catch (e) {
-      print("Error uploading image: $e");
+      print("Error mengunggah foto: $e");
       return widget.userData['profileImageUrl'] ?? '';
     }
   }

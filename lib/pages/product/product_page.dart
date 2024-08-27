@@ -127,7 +127,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                           return const SizedBox.shrink();
                         }
                         if (snapshot.hasError) {
-                          return const Text('Error loading merchant data');
+                          return const Text('Error memuat data');
                         }
                         final user = snapshot.data;
                         return ProductCard(

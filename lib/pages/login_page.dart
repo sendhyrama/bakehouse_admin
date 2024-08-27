@@ -41,7 +41,7 @@ class _LoginAdminPageState extends ConsumerState<LoginAdminPage> {
         await ref.read(authProvider.notifier).signOut();
       }
     } catch (e) {
-      _showSnackbar("Login failed: $e");
+      _showSnackbar("Login gagal: email atau password salah.");
     }
   }
 
