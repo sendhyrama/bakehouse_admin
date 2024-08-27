@@ -109,7 +109,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                 if (filteredProducts.isEmpty) {
                   return Center(
                     child: Text(
-                      'No products found.',
+                      'Produk tidak ditemukan.',
                       style: TextStyles.h3.copyWith(color: Colors.grey),
                     ),
                   );

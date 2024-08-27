@@ -56,7 +56,8 @@ class _UserPageState extends ConsumerState<UserPage>
             color: Colors.white,
             child: TabBar(
               labelColor: PrimaryColor.c8,
-              labelStyle: TextStyles.b1.copyWith(color: PrimaryColor.c8, fontWeight: FontWeight.bold),
+              labelStyle: TextStyles.b1.copyWith(
+                  color: PrimaryColor.c8, fontWeight: FontWeight.bold),
               unselectedLabelColor: Colors.grey,
               unselectedLabelStyle: TextStyles.b1.copyWith(color: Colors.grey),
               controller: _tabController,
@@ -121,7 +122,12 @@ class _UserList extends ConsumerWidget {
         }).toList();
 
         if (filteredList.isEmpty) {
-          return const Center(child: Text('No users found.'));
+          return Center(
+            child: Text(
+              'Pengguna tidak ditemukan.',
+              style: TextStyles.h3.copyWith(color: Colors.grey),
+            ),
+          );
         }
 
         return ListView.builder(

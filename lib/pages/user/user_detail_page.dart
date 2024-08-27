@@ -15,6 +15,7 @@ class UserDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text(
           'Detail Pengguna',
           style: TextStyles.h3,
