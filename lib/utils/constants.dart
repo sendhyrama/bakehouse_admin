@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class AppConstants {
   // API Endpoints
   static const String apiBaseUrl = 'https://api.example.com';
@@ -25,8 +27,10 @@ class AppConstants {
   static const double defaultFontSize = 14.0;
 
   // Error Messages
-  static const String networkError = 'Unable to connect. Please try again later.';
-  static const String unknownError = 'An unknown error occurred. Please try again.';
+  static const String networkError =
+      'Unable to connect. Please try again later.';
+  static const String unknownError =
+      'An unknown error occurred. Please try again.';
 
   // Regex Patterns
   static const String emailPattern =
@@ -35,10 +39,17 @@ class AppConstants {
 
   // Asset paths
   static const String logoPath = 'assets/images/logo-light.svg';
-  static const String userPlaceholderPath = 'assets/images/icons/user.png';
-  static const String imagePlaceholderPath = 'assets/images/icons/image.png';
+  static const String userPlaceholderPath = 'assets/icons/user.png';
+  static const String imagePlaceholderPath = 'assets/icons/image.png';
 
   // Other constants
   static const String currencySymbol = 'Rp';
-  static const String dateFormat = 'yyyy-MM-dd';
+
+  // Define Date Formats
+  static final DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+  static final DateFormat timeFormat = DateFormat('HH:mm:ss');
+  static final DateFormat dateTimeFormat = DateFormat('dd/MM/yyyy HH:mm:ss');
+  
+  // You can add more specific formats as needed
+  static final DateFormat bornDateFormat = DateFormat('dd MMM yyyy');
 }
