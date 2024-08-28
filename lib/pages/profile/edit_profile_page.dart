@@ -1,15 +1,14 @@
 import 'dart:io';
 import 'package:bakehouse_admin/pages/navbar_state.dart';
+import 'package:bakehouse_admin/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import '../../../routes.dart';
 import '../../../utils/text_styles.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../widgets/custom_button.dart';
-import '../../widgets/image_upload_field.dart';
 
 class EditProfilePage extends StatefulWidget {
   final Map<String, dynamic> userData;
@@ -83,9 +82,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         final imageUrl = await _uploadImage();
         await _updateUser(userId, imageUrl);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile berhasil di-update.')),
+          const SnackBar(content: Text('Profil berhasil di-update.')),
         );
-        // Navigator.pushReplacementNamed(context, Routes.navbarAdmin, arguments: 3);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -95,7 +93,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       } catch (error) {
         print("Error updating profile: $error");
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error updating profile: $error')),
+          SnackBar(content: Text('Gagal mengupdate profil: $error')),
         );
       }
     }
@@ -123,12 +121,39 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ImageUploadField(
-                      imageFile: _image,
-                      imageUrl: widget.userData['profileImageUrl'],
-                      onTap: _getImage,
-                      labelText: 'Foto Profil',
-                      optionalLabelText: 'Unggah Foto Profil',
+                    Center(
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 50,
+                            backgroundImage: _image != null
+                                ? FileImage(_image!)
+                                : (widget.userData['profileImageUrl'] != null &&
+                                        widget.userData['profileImageUrl'] !=
+                                            '')
+                                    ? NetworkImage(
+                                        widget.userData['profileImageUrl'])
+                                    : null,
+                            child: _image == null &&
+                                    (widget.userData['profileImageUrl'] ==
+                                            null ||
+                                        widget.userData['profileImageUrl'] ==
+                                            '')
+                                ? const Icon(
+                                    Icons.person,
+                                    size: 50,
+                                    color: Colors.grey,
+                                  )
+                                : null,
+                          ),
+                          TextButton(
+                            onPressed: _getImage,
+                            child: Text('Ganti Foto',
+                                style: TextStyles.b1
+                                    .copyWith(color: PrimaryColor.c8)),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 16),
                     _buildTextField("Nama", _fullNameController, 'Nama'),
