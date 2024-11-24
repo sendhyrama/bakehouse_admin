@@ -22,17 +22,32 @@ class UserDetailPage extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.delete, color: Colors.red),
+            icon: Icon(
+              user.isSuspended ? Icons.lock_open : Icons.lock,
+              color: user.isSuspended ? Colors.green : Colors.red,
+            ),
             onPressed: () async {
-              final confirmed = await _showConfirmationDialog(context);
+              final confirmed = await _showConfirmationDialog(
+                context,
+                user.isSuspended ? 'Buka Suspend Pengguna' : 'Suspend Pengguna',
+                user.isSuspended
+                    ? 'Apakah kamu yakin ingin membuka suspend pengguna ini?'
+                    : 'Apakah kamu yakin ingin suspend pengguna ini?',
+              );
               if (confirmed) {
                 try {
-                  await ref.read(deleteUserProvider(user.id).future);
+                  await ref.read(suspendUserProvider({
+                    'userId': user.id,
+                    'suspend': !user.isSuspended,
+                  }).future);
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                          '${user.fullname ?? user.businessName} berhasil dihapus'),
+                        user.isSuspended
+                            ? '${user.fullname ?? user.businessName} telah aktif kembali'
+                            : '${user.fullname ?? user.businessName} berhasil di-suspend',
+                      ),
                       backgroundColor: Colors.green,
                     ),
                   );
@@ -137,24 +152,21 @@ class UserDetailPage extends ConsumerWidget {
     );
   }
 
-  Future<bool> _showConfirmationDialog(BuildContext context) async {
+  Future<bool> _showConfirmationDialog(
+      BuildContext context, String title, String content) async {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Hapus Pengguna', style: TextStyles.h3),
-            content: const Text(
-              'Apakah Anda yakin ingin menghapus pengguna ini?',
-              style: TextStyles.b1,
-            ),
+            title: Text(title, style: TextStyles.h3),
+            content: Text(content, style: TextStyles.b1),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: Text('Batal',
-                    style: TextStyles.b1.copyWith(color: NeutralColor.c7)),
+                child: Text('Batal', style: TextStyles.b1),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: Text('Hapus',
+                child: Text('Konfirmasi',
                     style: TextStyles.b1.copyWith(color: Colors.red)),
               ),
             ],

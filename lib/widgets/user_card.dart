@@ -34,23 +34,41 @@ class UserCard extends StatelessWidget {
                 backgroundImage: _getAvatarImage(user),
               ),
               const SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (user.role == 'customer') ...[
-                    Text(user.fullname ?? '', style: TextStyles.h3),
-                    const SizedBox(height: 4),
-                    Text(user.email ?? '', style: TextStyles.b1),
-                    const SizedBox(height: 4),
-                    Text(user.phone ?? '', style: TextStyles.b1),
-                  ] else if (user.role == 'merchant') ...[
-                    Text(user.businessName ?? '', style: TextStyles.h3),
-                    const SizedBox(height: 4),
-                    Text(user.businessEmail ?? '', style: TextStyles.b1),
-                    const SizedBox(height: 4),
-                    Text(user.phone ?? '', style: TextStyles.b1),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            user.fullname ?? user.businessName ?? 'Unknown',
+                            style: TextStyles.h3,
+                          ),
+                        ),
+                        if (user.isSuspended)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 8),
+                            color: Colors.red,
+                            child: Text('Suspended',
+                                style: TextStyles.b2
+                                    .copyWith(color: Colors.white)),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    if (user.role == 'customer') ...[
+                      Text(user.email ?? '', style: TextStyles.b1),
+                      const SizedBox(height: 4),
+                      Text(user.phone ?? '', style: TextStyles.b1),
+                    ] else if (user.role == 'merchant') ...[
+                      Text(user.businessEmail ?? '', style: TextStyles.b1),
+                      const SizedBox(height: 4),
+                      Text(user.phone ?? '', style: TextStyles.b1),
+                    ],
                   ],
-                ],
+                ),
               ),
             ],
           ),

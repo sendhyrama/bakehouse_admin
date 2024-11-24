@@ -6,6 +6,17 @@ import '../models/user_model.dart';
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  Future<void> suspendUser(String userId, bool suspend) async {
+    try {
+      await _db
+          .collection('users')
+          .doc(userId)
+          .update({'isSuspended': suspend});
+    } catch (e) {
+      throw Exception('Error suspending user: $e');
+    }
+  }
+
   Stream<List<Product>> getProducts() {
     return _db.collection('products').snapshots().map((snapshot) => snapshot
         .docs
@@ -36,8 +47,7 @@ class FirestoreService {
         .where('role', isEqualTo: role)
         .snapshots()
         .map((snapshot) => snapshot.docs
-            .map((doc) =>
-                User.fromMap(doc.id, doc.data()))
+            .map((doc) => User.fromMap(doc.id, doc.data()))
             .toList());
   }
 

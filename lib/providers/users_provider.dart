@@ -3,11 +3,20 @@ import '../models/user_model.dart';
 import '../services/firestore_service.dart';
 import 'firestore_service_provider.dart';
 
-final usersByRoleProvider = StreamProvider.family<List<User>, String>((ref, role) {
+final usersByRoleProvider =
+    StreamProvider.family<List<User>, String>((ref, role) {
   final firestoreService = ref.read(firestoreServiceProvider);
   return firestoreService.getUsersByRole(role);
 });
 
-final deleteUserProvider = FutureProvider.family<void, String>((ref, userId) async {
+final deleteUserProvider =
+    FutureProvider.family<void, String>((ref, userId) async {
   return FirestoreService().deleteUser(userId);
+});
+
+final suspendUserProvider =
+    FutureProvider.family<void, Map<String, dynamic>>((ref, params) async {
+  final userId = params['userId'] as String;
+  final suspend = params['suspend'] as bool;
+  return FirestoreService().suspendUser(userId, suspend);
 });

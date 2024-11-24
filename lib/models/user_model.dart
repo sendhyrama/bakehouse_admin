@@ -13,6 +13,7 @@ class User {
   final String? businessEmail;
   final String? businessAddress;
   final String? businessDescription;
+  final bool isSuspended;
 
   User({
     required this.id,
@@ -29,6 +30,7 @@ class User {
     this.businessAddress,
     this.businessDescription,
     this.ownerName,
+    this.isSuspended = false,
   });
 
   factory User.fromMap(String id, Map<String, dynamic> data) {
@@ -47,6 +49,7 @@ class User {
       ownerName: data['owner_name'],
       businessAddress: data['business_address'],
       businessDescription: data['business_description'],
+      isSuspended: data['isSuspended'] ?? false,
     );
   }
 }
