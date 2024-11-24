@@ -101,46 +101,46 @@ class ProfilePage extends ConsumerWidget {
                   ],
                 ),
               ),
-              _buildListTile(
-                context,
-                icon: Icons.help_outline,
-                title: 'Pusat Bantuan',
-                onTap: () {
-                  // Navigate to the respective page
-                },
-              ),
-              _buildListTile(
-                context,
-                icon: Icons.description_outlined,
-                title: 'Syarat & Ketentuan',
-                onTap: () {
-                  // Navigate to the respective page
-                },
-              ),
-              _buildListTile(
-                context,
-                icon: Icons.lock_outline,
-                title: 'Kebijakan Privasi',
-                onTap: () {
-                  // Navigate to the respective page
-                },
-              ),
-              _buildListTile(
-                context,
-                icon: Icons.info_outline,
-                title: 'Tentang',
-                onTap: () {
-                  // Navigate to the respective page
-                },
-              ),
-              _buildListTile(
-                context,
-                icon: Icons.settings_outlined,
-                title: 'Pengaturan Akun',
-                onTap: () {
-                  // Navigate to the respective page
-                },
-              ),
+              // _buildListTile(
+              //   context,
+              //   icon: Icons.help_outline,
+              //   title: 'Pusat Bantuan',
+              //   onTap: () {
+              //     // Navigate to the respective page
+              //   },
+              // ),
+              // _buildListTile(
+              //   context,
+              //   icon: Icons.description_outlined,
+              //   title: 'Syarat & Ketentuan',
+              //   onTap: () {
+              //     // Navigate to the respective page
+              //   },
+              // ),
+              // _buildListTile(
+              //   context,
+              //   icon: Icons.lock_outline,
+              //   title: 'Kebijakan Privasi',
+              //   onTap: () {
+              //     // Navigate to the respective page
+              //   },
+              // ),
+              // _buildListTile(
+              //   context,
+              //   icon: Icons.info_outline,
+              //   title: 'Tentang',
+              //   onTap: () {
+              //     // Navigate to the respective page
+              //   },
+              // ),
+              // _buildListTile(
+              //   context,
+              //   icon: Icons.settings_outlined,
+              //   title: 'Pengaturan Akun',
+              //   onTap: () {
+              //     // Navigate to the respective page
+              //   },
+              // ),
               _buildListTile(
                 context,
                 icon: Icons.exit_to_app,
